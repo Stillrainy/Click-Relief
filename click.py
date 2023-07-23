@@ -1,3 +1,4 @@
+import sys
 import os
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
@@ -167,7 +168,13 @@ class Application(tk.Tk):
     def show_about(self):
         about_window = tk.Toplevel(self)
         about_window.title("关于")
-        image = Image.open("about.png")
+        if getattr(sys, 'frozen', False):
+            application_path = sys._MEIPASS
+        else:
+            application_path = os.path.dirname(os.path.abspath(__file__))
+
+        image_path = os.path.join(application_path, 'about.png')
+        image = Image.open(image_path)
         image = image.resize((500, 500), Image.LANCZOS)
         photo = ImageTk.PhotoImage(image)
         about_window.geometry(f"{image.width}x{image.height}")
