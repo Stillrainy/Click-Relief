@@ -1,0 +1,5 @@
+*.spec
+build
+dist
+*.txt
+.DS_Store
