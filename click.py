@@ -15,7 +15,7 @@ class LoginDialog(tk.Toplevel):
     def __init__(self, parent):
         tk.Toplevel.__init__(self, parent)
         self.title("Click Relief")
-        self.geometry("200x100")
+        self.geometry("500x300")
 
         self.label = tk.Label(self, text="Enter password:")
         self.label.pack(pady=5)
@@ -46,6 +46,8 @@ class Application(tk.Tk):
         super().__init__()
 
         self.title("Click Relief v1.0 - 脑子露馅")
+        self.geometry("800x600")
+
         menu = tk.Menu(self)
         self.config(menu=menu)
         about_menu = tk.Menu(menu)
@@ -82,7 +84,7 @@ class Application(tk.Tk):
         self.position = None
         self.filename = None
 
-        self.minsize(300, 300)
+        self.minsize(800, 600)
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
         self.columnconfigure(2, weight=1)
@@ -148,8 +150,8 @@ class Application(tk.Tk):
             pyautogui.doubleClick(self.position)
             line = random.choice(lines).strip()
             pyperclip.copy(line)
-            pyautogui.hotkey('command')
-            pyautogui.hotkey('command', 'v')
+            pyautogui.hotkey('ctrl')
+            pyautogui.hotkey('ctrl', 'v')
             pyautogui.press('enter')
 
             self.progress['value'] = i+1
