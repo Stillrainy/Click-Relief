@@ -46,6 +46,12 @@ class Application(tk.Tk):
         super().__init__()
 
         self.title("Click Relief v1.0 - 脑子露馅")
+        menu = tk.Menu(self)
+        self.config(menu=menu)
+        about_menu = tk.Menu(menu)
+        menu.add_cascade(label="帮助", menu=about_menu)
+        about_menu.add_command(label="关于", command=self.show_about)
+        self.createcommand('::tk::mac::ShowAbout', self.show_about)
 
         self.password = self.create_password()
         self.login()
@@ -57,7 +63,8 @@ class Application(tk.Tk):
         self.entry_iter = tk.Entry(self, textvariable=self.iter_var, width=10)
         self.entry_iter.grid(row=0, column=1)
 
-        self.file_button = tk.Button(self, text="Choose File", command=self.select_file)
+        self.file_button = tk.Button(
+            self, text="Choose File", command=self.select_file)
         self.file_button.grid(row=1, column=0)
 
         self.start_button = tk.Button(self, text="Start", command=self.start)
@@ -82,7 +89,6 @@ class Application(tk.Tk):
 
         for i in range(5):
             self.rowconfigure(i, weight=1)
-
 
     def select_file(self):
         filename = filedialog.askopenfilename(
@@ -157,6 +163,9 @@ class Application(tk.Tk):
 
         self.start_button["state"] = "normal"
         messagebox.showinfo("Info", "Process completed!")
+
+    def show_about(self):
+        tk.messagebox.showinfo("关于", "版本: 1.0\n作者: 脑子露馅")
 
 
 if __name__ == "__main__":
