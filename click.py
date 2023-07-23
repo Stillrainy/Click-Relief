@@ -2,6 +2,7 @@ import os
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 from tkinter import Toplevel as tkToplevel
+from PIL import Image, ImageTk
 import hashlib
 import datetime
 import time
@@ -164,7 +165,16 @@ class Application(tk.Tk):
         messagebox.showinfo("Info", "任务完成!")
 
     def show_about(self):
-        tk.messagebox.showinfo("关于", "版本: 1.0\n作者: 脑子露馅")
+        about_window = tk.Toplevel(self)
+        about_window.title("关于")
+        image = Image.open("about.png")
+        image = image.resize((500, 500), Image.LANCZOS)
+        photo = ImageTk.PhotoImage(image)
+        about_window.geometry(f"{image.width}x{image.height}")
+        about_window.resizable(False, False)
+        label = tk.Label(about_window, image=photo)
+        label.image = photo
+        label.pack()
 
 
 if __name__ == "__main__":
