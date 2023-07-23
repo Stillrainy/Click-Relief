@@ -177,7 +177,7 @@ class Application(tk.Tk):
 
         image_path = os.path.join(application_path, 'about.png')
         image = Image.open(image_path)
-        image = image.resize((500, 500), Image.LANCZOS)
+        image = image.resize((800, 800), Image.LANCZOS)
         photo = ImageTk.PhotoImage(image)
         about_window.geometry(f"{image.width}x{image.height}")
         about_window.resizable(False, False)
