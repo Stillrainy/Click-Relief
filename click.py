@@ -16,7 +16,7 @@ import pyperclip
 class LoginDialog(tk.Toplevel):
     def __init__(self, parent):
         tk.Toplevel.__init__(self, parent)
-        self.title("Click Relief")
+        self.title("验证")
         self.geometry("200x100")
 
         self.label = tk.Label(self, text="输入密码:")
@@ -47,7 +47,7 @@ class Application(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.title("Click Relief v1.0 - 脑子露馅")
+        self.title("弹幕助手 v1.1 - 脑子露馅")
         menu = tk.Menu(self)
         self.config(menu=menu)
         about_menu = tk.Menu(menu)
