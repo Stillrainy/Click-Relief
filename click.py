@@ -2,9 +2,7 @@ import sys
 import os
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
-from tkinter import Toplevel as tkToplevel
 from PIL import Image, ImageTk
-import hashlib
 import datetime
 import time
 import random
@@ -12,50 +10,16 @@ import threading
 import pyautogui
 import pyperclip
 
-
-class LoginDialog(tk.Toplevel):
-    def __init__(self, parent):
-        tk.Toplevel.__init__(self, parent)
-        self.title("验证")
-        self.geometry("500x300")
-
-        self.label = tk.Label(self, text="输入密码:")
-        self.label.pack(pady=5)
-
-        self.password_entry = tk.Entry(self, show="*")
-        self.password_entry.pack(pady=5)
-
-        self.submit_button = tk.Button(
-            self, text="提交", command=self.check_password)
-        self.submit_button.pack(pady=5)
-
-        self.protocol('WM_DELETE_WINDOW', self.on_closing)
-
-    def check_password(self):
-        entered_password = self.password_entry.get()
-
-        if entered_password == self.master.password:
-            self.destroy()
-        else:
-            messagebox.showerror("Error", "密码错误")
-
-    def on_closing(self):
-        self.master.destroy()  # End the main program
-
-
 class Application(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.title("弹幕助手 v1.1 - 脑子露馅")
+        self.title("弹幕助手 v1.2 - 脑子露馅")
         menu = tk.Menu(self)
         self.config(menu=menu)
         about_menu = tk.Menu(menu)
         menu.add_cascade(label="帮助", menu=about_menu)
         about_menu.add_command(label="关于", command=self.show_about)
-
-        self.password = self.create_password()
-        self.login()
 
         self.label_iter = tk.Label(self, text="点击次数:")
         self.label_iter.grid(row=0, column=0)
@@ -98,16 +62,6 @@ class Application(tk.Tk):
             self.filename = filename
             messagebox.showinfo(
                 "Info", f"使用文件: {os.path.basename(self.filename)}")
-
-    def login(self):
-        login_dialog = LoginDialog(self)
-        self.wait_window(login_dialog)
-
-    def create_password(self):
-        now = datetime.datetime.now()
-        year, week, _ = now.isocalendar()
-        password_str = f"{year}{week}"
-        return hashlib.sha256(password_str.encode()).hexdigest()
 
     def start(self):
         if not self.filename:
